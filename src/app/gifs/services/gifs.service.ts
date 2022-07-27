@@ -7,8 +7,9 @@ import { GifsResponse, Gif } from '../interfaces/gifs.interface';
 })
 export class GifsService {
   private _history:string[]=[];
-  private _apiKey:string = 'bY3tOsTfn2p3HyyScRQBMwX3Y2eupIda&q';
+  private _apiKey:string = 'bY3tOsTfn2p3HyyScRQBMwX3Y2eupIda';
   public dataApi:Gif[]=[];
+  private _apiUrl:string='https://api.giphy.com/v1/gifs';
 
   get historyArg():string[]{
     return [...this._history];
@@ -28,8 +29,12 @@ export class GifsService {
     this._history=this._history.splice(0,10);
   }
   localStorage.setItem('history',JSON.stringify(this._history));
+  const params =new HttpParams()
+                .set('api_key',this._apiKey)
+                .set('q',arg)
+                .set('limit','10');
 
-  this._http.get<GifsResponse>(`https://api.giphy.com/v1/gifs/search?api_key=${this._apiKey}=${arg}&limit=10`)
+  this._http.get<GifsResponse>(`${this._apiUrl}/search?`,{params})
       .subscribe(resp=>{
         this.dataApi=resp.data;
         localStorage.setItem('result',JSON.stringify(this.dataApi));
