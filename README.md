@@ -22,5 +22,5 @@ If you want to hire me , you only have to write to me.
 - szxrocode@gmail.com (@Szxro)
 
 # Demo
-https://classy-sherbet-f140bb.netlify.app/
+https://gifs-app-demo.netlify.app/
 
